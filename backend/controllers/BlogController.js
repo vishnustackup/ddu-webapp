@@ -3,16 +3,18 @@ const Logger = require('../utils/Logger')
 
 const CreateBlog = async (req, res) => {
 
-    const { title, description, author } = req.body
+    const { title, description } = req.body
     try {
 
         const newdata = await new Blog({
             title,
             description,
-            author
+            author: req.user.name
         })
 
         await newdata.save()
+        Logger.info('jkbjbj')
+
         res.status(200).json({ msg: "created successfully", data: newdata })
     } catch (error) {
         res.status(500).json({ msg: "server error" })
@@ -22,7 +24,7 @@ const CreateBlog = async (req, res) => {
 const getposts = async (req, res) => {
     try {
         const posts = await Blog.find().sort({ createdAt: -1 })
-                Logger.info('jkbjbj')
+        Logger.info('jkbjbj')
 
         res.status(200).json({ msg: "all posts", data: posts })
     } catch (error) {
