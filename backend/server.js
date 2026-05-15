@@ -4,8 +4,16 @@ const connectDB = require('./config/db')
 connectDB()
 const BlogRoutes = require('./routes/BlogRoute')
 const Userroutes = require('./routes/UserRoute')
-const morgan = require('morgan')
-app.use(morgan('dev'))
+const cors = require('cors')
+
+const cookieParser = require('cookie-parser')
+
+app.use(cookieParser())
+app.use(cors({
+    origin: "http://localhost:5173",
+    credentials: true
+}))
+
 app.use(express.json())
 app.use('/blog', BlogRoutes)
 app.use('/user', Userroutes)

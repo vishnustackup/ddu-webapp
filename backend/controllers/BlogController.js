@@ -13,9 +13,10 @@ const CreateBlog = async (req, res) => {
         })
 
         await newdata.save()
-        Logger.info('jkbjbj')
 
-        res.status(200).json({ msg: "created successfully", data: newdata })
+
+
+        res.status(200).json({ success: true, msg: "created successfully", data: newdata })
     } catch (error) {
         res.status(500).json({ msg: "server error" })
     }
