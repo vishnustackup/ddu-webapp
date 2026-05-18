@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { getdata } from "../Api/api";
+import { deletepost, getdata } from "../../Api/api";
 import styled from "styled-components";
-
+import { Link } from "react-router-dom";
 const GridContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -23,7 +23,8 @@ const Section = styled.div``;
 const SubHead = styled.h3`
   color: grey;
   font-family: "arial";
-`
+`;
+
 const Getdata = () => {
   const [data, setdata] = useState([]);
   useEffect(() => {
@@ -34,6 +35,22 @@ const Getdata = () => {
     };
     fetchdata();
   }, []);
+
+  const handledelete = async (id) => {
+    window.confirm("Are you sure?");
+
+    try {
+      const res = await deletepost(id);
+
+      if (res.success) {
+        setdata(data.filter((post) => post._id !== id));
+
+        alert("Deleted successfully ✅");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <Section>
       <GridContainer>
@@ -42,6 +59,10 @@ const Getdata = () => {
             <Text>{e.title}</Text>
             <p>{e.description}</p>
             <SubHead>{e.author}</SubHead>
+            <Link to={`/edit/${e._id}`}>
+              <button>Edit</button>
+            </Link>
+            <button onClick={() => handledelete(e._id)}>Delete</button>
           </Card>
         ))}
       </GridContainer>

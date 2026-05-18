@@ -16,7 +16,7 @@ const AuthMiddleware = async (req, res, next) => {
         // for rendering in react
 
         const token = req.cookies.token   // from cookie
-
+        console.log(req.cookies)
         if (!token) {
             return res.status(401).json({ msg: "Not authenticated" })
         }

@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { LoginUser } from "../../Api/api";
+import { useNavigate } from "react-router-dom";
 const Login = () => {
-
+const navigate= useNavigate()
   const [form, setform] = useState({   // let form ={email:"", password:""}
     email: "",
     password: "",
@@ -19,6 +20,8 @@ const Login = () => {
     try {
       const res = await LoginUser(form);
       if (res.success) {
+        
+        navigate('/allposts')
       console.log("logedin succesfully");
       setform ({
         email:"",
