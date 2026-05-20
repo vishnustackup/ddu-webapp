@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { deletepost, getdata } from "../../Api/api";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import NavBar from "../RoutingSection/NavBar";
 const GridContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -53,6 +54,7 @@ const Getdata = () => {
   };
   return (
     <Section>
+      <NavBar />
       <GridContainer>
         {data.map((e, index) => (
           <Card key={e._id || index}>

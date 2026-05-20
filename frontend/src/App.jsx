@@ -5,13 +5,12 @@ import Getdata from "./components/Blogs/Getdata";
 // import ProductList from "./components/ProductList";
 import "./styles/Hello.css";
 import { Routes, Route } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 import EditBlog from "./components/Blogs/EditBlog";
+import {ToastContainer} from 'react-toastify'
 function App() {
   return (
     <>
-      <ToastContainer position="top-right" autoClose={2000} />
-
+<ToastContainer position="top-right" autoClose={5000}/>
       <Routes>
         <Route path="/" element={<NavBar />} />
         <Route path="/create" element={<Createblog />} />

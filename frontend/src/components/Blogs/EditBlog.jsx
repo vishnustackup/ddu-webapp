@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getsinglepost, Updatepost } from "../../Api/api";
+import { toast } from "react-toastify";
 const EditBlog = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -42,10 +43,11 @@ const EditBlog = () => {
     try {
       const res = await Updatepost(id, form);
       if (res.success) {
+        toast.success("post updated");
         navigate("/allposts");
       }
     } catch (error) {
-      console.log(error);
+      toast.error(error);
     }
   };
 

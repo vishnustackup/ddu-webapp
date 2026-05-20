@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { LoginUser } from "../../Api/api";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { AuthProvider } from "../../context/AuthContext";
 const Login = () => {
-const navigate= useNavigate()
-  const [form, setform] = useState({   // let form ={email:"", password:""}
+  const {setuser} = useContext(AuthProvider)
+  const navigate = useNavigate();
+  const [form, setform] = useState({
     email: "",
     password: "",
   });
@@ -18,18 +21,19 @@ const navigate= useNavigate()
   const handlesubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await LoginUser(form);
+      const res = await LoginUser(form); 
       if (res.success) {
-        
-        navigate('/allposts')
-      console.log("logedin succesfully");
-      setform ({
-        email:"",
-        password:""
-      })
+        setuser(res.user)
+        toast.info("loggedin succesfully");
+        setform(res.user);
+        navigate("/allposts");
+        console.log("logedin succesfully");
+        setform({
+          email: "",
+          password: "",
+        });
       } else {
         console.log("error");
-        
       }
     } catch (error) {
       console.log(error);

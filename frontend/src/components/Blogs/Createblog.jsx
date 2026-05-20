@@ -3,6 +3,7 @@ import { createpost } from "../../Api/api";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import styled from "styled-components";
+import { useEffect } from "react";
 
 const FormBox = styled.div`
   display: flex;
@@ -23,6 +24,11 @@ const Createblog = () => {
     description: "",
   });
 
+  useEffect(()=>{
+   const da= inputref.current.focus()
+   console.log(da);
+   
+  })
   const handlechange = (e) => {
     setform({
       ...form,
@@ -55,6 +61,7 @@ const Createblog = () => {
           value={form.title}
           onChange={handlechange}
           placeholder="title"
+          ref={inputref}
         />
         <textarea
           name="description"
